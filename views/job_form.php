@@ -1,3 +1,9 @@
+<?php 
+    $Jobname = "" ; 
+    $File = null ;
+
+?>
+
 <tr class="entry-row">
     <form method="POST" style="display: contents;">
         <td>
@@ -31,14 +37,41 @@
                     class="btn <?php echo $_SESSION['current_job']['data_fetched'] ? 'btn-completed' : 'btn-success'; ?>">
                 Fetch Data
             </button>
-            <button type="submit" name="action" value="upload_csv_current" 
-                    class="btn <?php echo $_SESSION['current_job']['csv_uploaded'] ? 'btn-completed' : 'btn-warning'; ?>">
-                Upload CSV
-            </button>
-            <button type="submit" name="action" value="send_to_monday_current" 
+            <form method="POST" enctype="multipart/form-data">
+                <div class="input-group">
+                    <!-- Hidden file input -->
+                    <input type="file" id="csv_upload" name="csv_file" accept=".csv" class="d-none" required style="display:none;">
+                    <button type="button" id="file_button" class="btn" style="background-color: #ff6600; color: white; border: none;">
+                        Choose File
+                    </button>
+                    <!-- Span now has ID to update via JS -->
+                    <span id="file_name" class="ms-2" style="color:<?= $File === null ? 'red' : 'black'; ?>">
+                        <?= $File === null ? 'No File Selected' : htmlspecialchars($File); ?>
+                    </span>
+                    <script>
+                        const fileInput = document.getElementById('csv_upload');
+                        const fileButton = document.getElementById('file_button');
+                        const fileNameSpan = document.getElementById('file_name');
+
+                        fileButton.onclick = () => {
+                            fileInput.click();
+                        };
+                        fileInput.onchange = (e) => {
+                            const fileName = e.target.files[0]?.name || 'No file selected';
+                            fileNameSpan.textContent = fileName;
+                            fileNameSpan.style.color = 'black'; // Change color to black when a file is selected
+                        };
+                    </script>
+
+                    <!-- Submit button -->
+                    <button type="submit" name="action" value="send_to_monday_current"
                     class="btn <?php echo $_SESSION['current_job']['sent_to_monday'] ? 'btn-completed' : 'btn-info'; ?>">
-                Send to Monday
-            </button>
+                        Send to Monday
+                    </button>
+
+                </div>
+            </form>
+
         </td>
         <td>
             <?php 
