@@ -48,6 +48,7 @@
         align-items: center;
         gap: 10px;
         flex-wrap: wrap;
+        justify-content:center;
     }
 
     .input-group select,
