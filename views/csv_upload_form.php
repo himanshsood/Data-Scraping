@@ -1,3 +1,106 @@
+<style>
+    .csv-upload-form {
+        width: 100%;
+        max-width: 100%;
+        margin: 30px auto;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 25px;
+        font-family: Arial, sans-serif;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+    }
+
+    .csv-upload-form form {
+        width: 100%;
+        max-width: 800px;
+        display: flex;
+        justify-content:center;
+        gap: 20px;
+    }
+
+    .workflow-indicator {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        background-color: #e9ecef;
+        border-radius: 6px;
+        font-weight: 500;
+    }
+
+    .workflow-step {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #dee2e6;
+        color: #495057;
+        transition: background-color 0.3s;
+    }
+
+    .workflow-step.completed {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .input-group select,
+    .input-group button {
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+    }
+
+    .input-group select:focus,
+    .input-group button:focus {
+        outline: none;
+        border-color: #80bdff;
+        box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+    }
+
+    #file_button {
+        cursor: pointer;
+    }
+
+    #file_name {
+        font-weight: bold;
+        min-width: 150px;
+    }
+
+    .btn {
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .btn-info:hover {
+        background-color: #138496;
+    }
+
+    .btn-completed {
+        background-color: #6c757d;
+        color: white;
+        cursor: default;
+    }
+
+    .btn-completed:hover {
+        background-color: #6c757d;
+    }
+</style>
+
+
 <div class="csv-upload-form">
     <form method="POST" enctype="multipart/form-data">
         <input type="text" name="job_name" id="current_job_name" 
@@ -39,3 +142,17 @@
         </div>
     </form>
 </div>
+
+<script> 
+// File input script
+const fileInput = document.getElementById('csv_upload');
+const fileButton = document.getElementById('file_button');
+const fileNameSpan = document.getElementById('file_name');
+
+fileButton.onclick = () => fileInput.click();
+fileInput.onchange = (e) => {
+    const fileName = e.target.files[0]?.name || 'No file selected';
+    fileNameSpan.textContent = fileName;
+    fileNameSpan.style.color = 'black';
+};
+</script>

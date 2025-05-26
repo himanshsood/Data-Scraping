@@ -1,12 +1,39 @@
 <?php
 require_once 'init.php';
 
+$File = null;  // Will hold the uploaded CSV file info
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jobId = $_POST['job_id'] ?? null;
-    $jobId = $_POST['job_id'] ?? null;
     $Gender = $_POST['gender'] ?? 'Men'; // Default to 'Men' if not set
+
     // Set the job name dynamically
     $jobName = ($Gender === 'Men') ? "Uploading CSV of Men" : "Uploading CSV of Women";
+
+    // FILE SYSTEM - Handle CSV upload
+    if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK) {
+        $File = $_FILES['csv_file']; // Store uploaded file metadata
+
+        // Ensure uploads folder exists
+        $uploadDir = __DIR__ . '/uploads/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        // Generate unique filename to prevent overwrite
+        $filename = uniqid('csv_', true) . '_' . basename($File['name']);
+        $destination = $uploadDir . $filename;
+
+        // Move uploaded file
+        if (move_uploaded_file($File['tmp_name'], $destination)) {
+            // Overwrite $File to point to saved file path if needed downstream
+            $File = $destination;
+        } else {
+            $File = null; // Reset on failure
+        }
+    }
+
+    // Job action handling
     switch ($_POST['action']) {
         case 'add_job':
             if (!empty($jobName)) {

@@ -12,7 +12,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 require_once 'init.php';
 
 // Your existing dashboard code
-require_once 'actions.php';
+require_once 'CSV_UPLOAD_POST.php';
 $jobs = array_reverse($_SESSION['jobs']);
 ?>
 
@@ -77,7 +77,8 @@ $jobs = array_reverse($_SESSION['jobs']);
     
     <div class="dashboard-content">
         <!-- <h2>Dashboard</h2> -->
-        <?php include 'views/job_form.php'; ?>
+        <?php include 'views/SET_AUTOMATIC.php'; ?>
+        <?php include 'views/csv_upload_form.php'; ?>
         <?php include 'views/header.php'; ?>
         <?php include 'views/job_history.php'; ?>
         <?php include 'views/controls.php'; ?>
