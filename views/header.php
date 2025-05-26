@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Job Management</title>
-    <link rel="stylesheet" href="style.css"> <!-- Your CSS path -->
+    <link rel="stylesheet" href="./styles/header.css"> <!-- Your CSS path -->
 </head>
 <body>
 <div class="container">

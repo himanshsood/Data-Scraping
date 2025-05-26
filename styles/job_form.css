@@ -1,0 +1,167 @@
+/* Container for side-by-side forms */
+        .form-row-wrapper {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-start;
+            margin: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Each form takes equal space but no less than 300px */
+        .update-form-container,
+        .csv-upload-form {
+            flex: 1;
+            min-width: 300px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        /* Update Management form styles */
+        .form-title {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        .checkbox-group label {
+            font-weight: bold;
+            color: #333;
+        }
+        .datetime-section {
+            margin-left: 20px;
+            padding: 10px;
+            background-color: #e8f4f8;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .datetime-section label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .datetime-section input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .manual-section {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff3cd;
+            border-radius: 5px;
+            border: 1px solid #ffeaa7;
+        }
+        .manual-update-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .manual-update-btn:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* CSV Upload Form styles */
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 8px 15px;
+            border: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+        .btn-info:hover {
+            background-color: #117a8b;
+        }
+        .btn-completed {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-completed:hover {
+            background-color: #1e7e34;
+        }
+        .ms-2 {
+            margin-left: 0.5rem;
+        }
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .status-created {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        .status-fetched {
+            background-color: #5cb85c;
+            color: white;
+        }
+        .auto-moved-message {
+            margin-top: 10px;
+            color: green;
+            font-weight: bold;
+        }
+        .workflow-indicator {
+            margin-bottom: 15px;
+        }
+        .workflow-step {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .workflow-step.completed {
+            background-color: #28a745;
+            color: white;
+        }

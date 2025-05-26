@@ -23,7 +23,7 @@
                         Cancel
                     </button>
                 </form>
-            <?php elseif ($index > 0 && $index <= 3): ?>
+            <?php elseif ($index > 0 && $index <= 2): ?>
                 <!-- Rollback for next 3 jobs -->
                 <form method="POST" style="display: contents;">
                     <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>">
