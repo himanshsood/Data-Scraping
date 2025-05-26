@@ -3,8 +3,10 @@ require_once 'init.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jobId = $_POST['job_id'] ?? null;
-    $jobName = $_POST['job_name'] ?? '';
-
+    $jobId = $_POST['job_id'] ?? null;
+    $Gender = $_POST['gender'] ?? 'Men'; // Default to 'Men' if not set
+    // Set the job name dynamically
+    $jobName = ($Gender === 'Men') ? "Uploading CSV of Men" : "Uploading CSV of Women";
     switch ($_POST['action']) {
         case 'add_job':
             if (!empty($jobName)) {

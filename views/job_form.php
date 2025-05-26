@@ -1,10 +1,6 @@
 <?php 
-    $Jobname = "" ; 
     $File = null ;
-?>
-
-<?php
-// Handle form submission
+// AUTO UPDATE SUBMIT FORM 
 if ($_POST) {
     if (isset($_POST['auto_update']) && $_POST['auto_update'] == '1') {
         $update_date = $_POST['update_date'];
@@ -258,10 +254,15 @@ if ($_POST) {
             <?php endif; ?>
 
             <div class="input-group">
+                <select name="gender" id="gender_select" required>
+                    <option value="">Gender</option>
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
+                </select>
                 <input type="file" id="csv_upload" name="csv_file" accept=".csv" required style="display:none;">
                 <button type="button" id="file_button" class="btn" style="background-color: #ff6600; color: white;">
                     Choose File
-                </button>
+                </button> 
                 <span id="file_name" class="ms-2" style="color:<?= $File === null ? 'red' : 'black'; ?>">
                     <?= $File === null ? 'No File Selected' : htmlspecialchars($File); ?>
                 </span>
@@ -270,25 +271,6 @@ if ($_POST) {
                     class="btn <?php echo $_SESSION['current_job']['sent_to_monday'] ? 'btn-completed' : 'btn-info'; ?>">
                     Send to Monday
                 </button>
-            </div>
-
-            <div class="csv-status">
-                <?php 
-                    $currentStatus = $_SESSION['current_job']['status'] ?? '';
-                    $statusClass = 'status-created';
-                    if (in_array(strtolower(str_replace(' ', '-', $currentStatus)), ['data-fetched', 'csv-uploaded', 'sent-to-monday'])) {
-                        $statusClass = 'status-fetched';
-                    }
-                ?>
-                <span class="status <?php echo $statusClass; ?>">
-                    <?php echo htmlspecialchars($currentStatus); ?>
-                </span>
-
-                <?php if (!empty($_SESSION['current_job']['sent_to_monday'])): ?>
-                <div class="auto-moved-message">
-                    ✓ Job completed and moved to history automatically
-                </div>
-                <?php endif; ?>
             </div>
         </form>
     </div>
