@@ -77,9 +77,8 @@ $jobs = array_reverse($_SESSION['jobs']);
     
     <div class="dashboard-content">
         <!-- <h2>Dashboard</h2> -->
-        
-        <?php include 'views/header.php'; ?>
         <?php include 'views/job_form.php'; ?>
+        <?php include 'views/header.php'; ?>
         <?php include 'views/job_history.php'; ?>
         <?php include 'views/controls.php'; ?>
     </div>

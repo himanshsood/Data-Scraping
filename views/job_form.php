@@ -4,12 +4,12 @@
 
 ?>
 
-<tr class="entry-row">
+
     <form method="POST" style="display: contents;">
         <td>
             <input type="text" name="job_name" id="current_job_name" 
-                   value="<?php echo htmlspecialchars($_SESSION['current_job']['job_name']); ?>"
-                   placeholder="Enter job name..." required>
+                   value="CSV UPLOAD"
+                   placeholder="Enter job name..." required style="display:none;">
 
             <?php if (!empty($_SESSION['current_job']['job_name'])): ?>
             <div class="workflow-indicator">
@@ -29,14 +29,10 @@
             <?php if ($_SESSION['current_job']['starting_time']): ?>
                 <?php echo date('M j, Y g:i A', strtotime($_SESSION['current_job']['starting_time'])); ?>
             <?php else: ?>
-                <em style="color: #666;">Autofilled </em>
+        
             <?php endif; ?>
         </td>
         <td class="actions">
-            <button type="submit" name="action" value="fetch_data_current" 
-                    class="btn <?php echo $_SESSION['current_job']['data_fetched'] ? 'btn-completed' : 'btn-success'; ?>">
-                Fetch Data
-            </button>
             <form method="POST" enctype="multipart/form-data">
                 <div class="input-group">
                     <!-- Hidden file input -->
@@ -75,20 +71,20 @@
         </td>
         <td>
             <?php 
-$currentStatus = $_SESSION['current_job']['status'];
-switch (strtolower(str_replace(' ', '-', $currentStatus))) {
-    case 'ready-to-create':
-        $statusClass = 'status-created';
-        break;
-    case 'data-fetched':
-    case 'csv-uploaded':
-    case 'sent-to-monday':
-        $statusClass = 'status-fetched';
-        break;
-    default:
-        $statusClass = 'status-created';
-}
-?>
+                $currentStatus = $_SESSION['current_job']['status'];
+                switch (strtolower(str_replace(' ', '-', $currentStatus))) {
+                    case 'ready-to-create':
+                        $statusClass = 'status-created';
+                        break;
+                    case 'data-fetched':
+                    case 'csv-uploaded':
+                    case 'sent-to-monday':
+                        $statusClass = 'status-fetched';
+                        break;
+                    default:
+                        $statusClass = 'status-created';
+                }
+            ?>
 
             <span class="status <?php echo $statusClass; ?>">
                 <?php echo htmlspecialchars($currentStatus); ?>
@@ -101,4 +97,4 @@ switch (strtolower(str_replace(' ', '-', $currentStatus))) {
             <?php endif; ?>
         </td>
     </form>
-</tr>
+

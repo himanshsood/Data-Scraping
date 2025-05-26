@@ -14,14 +14,8 @@
         <td class="actions">
             <form method="POST" style="display: contents;">
                 <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>">
-                <button type="submit" name="action" value="fetch_data" class="btn btn-disabled" disabled>
-                    Fetch Data
-                </button>
-                <button type="submit" name="action" value="upload_csv" class="btn btn-disabled" disabled>
-                    Upload CSV
-                </button>
-                <button type="submit" name="action" value="send_to_monday" class="btn btn-disabled" disabled>
-                    Send to Monday
+                <button type="submit" name="action" value="send_to_monday" class="btn">
+                    Rollback
                 </button>
             </form>
         </td>

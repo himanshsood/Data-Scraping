@@ -6,12 +6,7 @@
     <link rel="stylesheet" href="style.css"> <!-- Your CSS path -->
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1>Admin Panel</h1>
-        <p>Job Management System</p>
-    </div>
-    
+<div class="container">   
 
     <div class="table-container">
         <table>
