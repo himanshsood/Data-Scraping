@@ -5,19 +5,36 @@
     </td>
 </tr>
 <?php else: ?>
-    <?php foreach ($jobs as $job): ?>
+    <?php 
+    $index = 0;
+    foreach ($jobs as $job): 
+    ?>
     <tr>
         <td><strong><?php echo htmlspecialchars($job['job_name']); ?></strong></td>
         <td>
             <?php echo $job['starting_time'] ? date('M j, Y g:i A', strtotime($job['starting_time'])) : '<em style="color: #999;">Not started</em>'; ?>
         </td>
         <td class="actions">
-            <form method="POST" style="display: contents;">
-                <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>">
-                <button type="submit" name="action" value="send_to_monday" class="btn">
-                    Rollback
-                </button>
-            </form>
+            <?php if ($index === 0): ?>
+                <!-- Cancel for the most recent job -->
+                <form method="POST" style="display: contents;">
+                    <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>">
+                    <button type="submit" name="action" value="cancel" class="btn">
+                        Cancel
+                    </button>
+                </form>
+            <?php elseif ($index > 0 && $index <= 3): ?>
+                <!-- Rollback for next 3 jobs -->
+                <form method="POST" style="display: contents;">
+                    <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>">
+                    <button type="submit" name="action" value="send_to_monday" class="btn">
+                        Rollback
+                    </button>
+                </form>
+            <?php else: ?>
+                <!-- Empty cell for older jobs -->
+                &nbsp;
+            <?php endif; ?>
         </td>
         <td>
             <span class="status <?php 
@@ -41,5 +58,8 @@
             </span>
         </td>
     </tr>
-    <?php endforeach; ?>
+    <?php 
+    $index++;
+    endforeach; 
+    ?>
 <?php endif; ?>

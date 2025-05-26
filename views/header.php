@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="style.css"> <!-- Your CSS path -->
 </head>
 <body>
-<div class="container">   
+<div class="container">
+   
 
     <div class="table-container">
         <table>
@@ -19,4 +20,3 @@
                 </tr>
             </thead>
             <tbody>
-
