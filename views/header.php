@@ -11,6 +11,7 @@
         <h1>Admin Panel</h1>
         <p>Job Management System</p>
     </div>
+    
 
     <div class="table-container">
         <table>
@@ -23,3 +24,4 @@
                 </tr>
             </thead>
             <tbody>
+

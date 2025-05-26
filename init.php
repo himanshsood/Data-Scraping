@@ -1,5 +1,7 @@
 <?php
-session_start();
+// init.php
+
+// No need for session_start(); it’s already called in index.php
 
 // Initialize session data if not exists
 if (!isset($_SESSION['jobs'])) {
@@ -17,5 +19,3 @@ if (!isset($_SESSION['current_job'])) {
         'sent_to_monday' => false
     ];
 }
-
-?>
