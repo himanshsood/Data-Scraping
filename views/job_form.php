@@ -208,15 +208,24 @@ if ($_POST) {
             </div>
             
             <!-- Date and Time Section (shown when checkbox is checked) -->
-            <div id="datetimeSection" class="datetime-section hidden">
-                <label for="updateDate">Select Date:</label>
-                <input type="date" id="updateDate" name="update_date" required>
-                
-                <label for="updateTime">Select Time:</label>
-                <input type="time" id="updateTime" name="update_time" required>
-                
-                <button type="submit" class="manual-update-btn" style="margin-top: 10px;">Schedule Update</button>
-            </div>
+             <div id="datetimeSection" class="datetime-section hidden">
+            <label for="updateDay">Select Day:</label>
+            <select id="updateDay" name="update_day" required>
+                <option value="">Choose a day</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+            
+            <label for="updateTime">Select Time:</label>
+            <input type="time" id="updateTime" name="update_time" required>
+            
+            <button type="submit" class="manual-update-btn" style="margin-top: 10px;" onclick="showMessage('Update scheduled successfully!', 'success')">Schedule Update</button>
+        </div>
             
             <!-- Manual Update Section (shown when checkbox is not checked) -->
             <div id="manualSection" class="manual-section">
