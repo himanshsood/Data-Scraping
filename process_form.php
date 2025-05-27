@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle manual update via AJAX
     if (isset($_POST['manual_update'])) {
         $jobName = "Manual Update";
-        addJobToHistory($jobName, "Completed");
+      
         
         echo json_encode(['success' => true, 'message' => 'Manual update completed']);
         exit();
@@ -58,7 +58,7 @@ function handleAutoUpdate() {
     }
     
     $jobName = "Auto Update - " . ucfirst($day);
-    addJobToHistory($jobName, "Scheduled");
+   
     
     $_SESSION['message'] = "Automatic update scheduled for $day at $time";
     header('Location: index.php');

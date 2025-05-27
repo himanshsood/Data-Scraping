@@ -57,6 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         .form-group {
             margin-bottom: 15px;
+            /* background-color:black; */
+            display:flex;
+            flex-direction:column;
         }
         
         label {
@@ -67,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         input[type="text"],
         input[type="password"] {
-            width: 100%;
+            width: calc(100%-20px);
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;

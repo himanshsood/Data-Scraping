@@ -58,7 +58,7 @@ if (isset($_SESSION['message'])) {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: 14px;
     "></div>
-    
+
     <div class="header">
         <h1 class="welcome-text">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
         <a href="logout.php" class="logout-btn">Logout</a>
