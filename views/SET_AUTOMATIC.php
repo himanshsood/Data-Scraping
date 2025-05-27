@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Update Dashboard</title>
-    <style>
-        /* Add your CSS here */
-    </style>
-</head>
-<body>
+
     <div class="container">
         <!-- First Table: Automatic Update Form -->
         <div class="table-containerr">
@@ -72,7 +62,7 @@
             <div class="manual-update-box">
                 <div class="update-icon">↻</div>
                 <p style="margin-bottom: 20px; color: #666;">Click to manually update your data</p>
-                <button class="btn btn-secondary" onclick="manualUpdate()">Update Now</button>
+                <button class="btn btn-secondary updatenowbutton" onclick="manualUpdate()">Update Now</button>
             </div>
         </div>
 
@@ -128,5 +118,3 @@
             document.getElementById('fileNameDisplay').textContent = fileName;
         });
     </script>
-</body>
-</html>
