@@ -1,65 +1,41 @@
-<?php if (empty($jobs)): ?>
-<tr>
-    <td colspan="4" class="no-data">
-        No jobs created yet. Use the form above to add your first job.
-    </td>
-</tr>
-<?php else: ?>
-    <?php 
-    $index = 0;
-    foreach ($jobs as $job): 
-    ?>
-    <tr>
-        <td><strong><?php echo htmlspecialchars($job['job_name']); ?></strong></td>
-        <td>
-            <?php echo $job['starting_time'] ? date('M j, Y g:i A', strtotime($job['starting_time'])) : '<em style="color: #999;">Not started</em>'; ?>
-        </td>
-        <td class="actions">
-            <?php if ($index === 0): ?>
-                <!-- Cancel for the most recent job -->
-                <form method="POST" style="display: contents;">
-                    <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>">
-                    <button type="submit" name="action" value="cancel" class="btn">
-                        Cancel
-                    </button>
-                </form>
-            <?php elseif ($index > 0 && $index <= 2): ?>
-                <!-- Rollback for next 3 jobs -->
-                <form method="POST" style="display: contents;">
-                    <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>">
-                    <button type="submit" name="action" value="send_to_monday" class="btn">
-                        Rollback
-                    </button>
-                </form>
-            <?php else: ?>
-                <!-- Empty cell for older jobs -->
-                &nbsp;
-            <?php endif; ?>
-        </td>
-        <td>
-            <span class="status <?php 
-                switch(strtolower(str_replace(' ', '-', $job['status']))) {
-                    case 'created': echo 'status-created'; break;
-                    case 'fetching-data...':
-                    case 'uploading-csv...':
-                    case 'sending-to-monday...':
-                        echo 'status-fetching'; break;
-                    case 'data-fetched':
-                    case 'csv-uploaded':
-                    case 'sent-to-monday':
-                        echo 'status-fetched'; break;
-                    default: echo 'status-created';
-                }
-            ?>">
-                <?php echo htmlspecialchars($job['status']); ?>
-                <?php if (strpos($job['status'], '...') !== false): ?>
-                    <span class="loading"></span>
-                <?php endif; ?>
-            </span>
-        </td>
-    </tr>
-    <?php 
-    $index++;
-    endforeach; 
-    ?>
-<?php endif; ?>
+<div style="margin-top: 30px;">
+    <div class="table-container" style="width: 100%; flex: none;">
+        <h3 class="table-title">📋 Job History</h3>
+        <div class="table-wrapper">
+            <table id="jobHistoryTable" class="job-table">
+                <thead>
+                    <tr>
+                        <th>Job Name</th>
+                        <th>Starting Time</th>
+                        <th>Actions</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="jobHistoryBody">
+                    <?php if(empty($_SESSION['jobHistory'])): ?>
+                        <tr>
+                            <td colspan="4" class="no-jobs">No jobs found. Upload a CSV to see job history.</td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach($_SESSION['jobHistory'] as $index => $job): ?>
+                            <tr>
+                                <td class="job-name"><?= htmlspecialchars($job['name']) ?></td>
+                                <td class="starting-time"><?= htmlspecialchars($job['startTime']) ?></td>
+                                <td>
+                                    <?php if($index === 0): ?>
+                                        <button class="action-btn btn-cancel" onclick="cancelJob(<?= $job['id'] ?>)">Cancel</button>
+                                    <?php elseif($index === 1 || $index === 2): ?>
+                                        <button class="action-btn btn-rollback" onclick="rollbackJob(<?= $job['id'] ?>)">Rollback</button>
+                                    <?php else: ?>
+                                        -
+                                    <?php endif; ?>
+                                </td>
+                                <td><span class="status-badge status-sent"><?= htmlspecialchars($job['status']) ?></span></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
