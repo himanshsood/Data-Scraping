@@ -445,3 +445,151 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
     background: #ca6f1e;
     box-shadow: 0 4px 12px rgba(230, 126, 34, 0.25);
 }
+
+.table-containerr {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: white;
+            font-family: Arial, sans-serif;
+        }
+        
+        .table-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .schedule-display {
+            background-color: white;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-details {
+            flex-grow: 1;
+        }
+        
+        .schedule-label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        .schedule-value {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-enabled {
+            background-color: #27ae60;
+        }
+        
+        .status-disabled {
+            background-color: #e74c3c;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-edit {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-edit:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-primary {
+            background-color: #27ae60;
+            color: white;
+            margin-right: 10px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #229954;
+        }
+        
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .edit-form {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-group select,
+        .form-group input[type="time"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
