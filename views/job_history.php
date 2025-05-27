@@ -1,6 +1,6 @@
 <div style="margin-top: 30px;">
     <div class="table-container" style="width: 100%; flex: none;">
-        <h3 class="table-title">📋 Job History</h3>
+        <h3 class="table-title">Job History</h3>
         <div class="table-wrapper">
             <table id="jobHistoryTable" class="job-table">
                 <thead>

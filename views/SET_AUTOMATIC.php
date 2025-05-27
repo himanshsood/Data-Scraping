@@ -1,7 +1,7 @@
 <div class="container">
     <!-- First Table: Automatic Update Form -->
     <div class="table-container">
-        <h3 class="table-title">🔄 Automatic Update</h3>
+        <h3 class="table-title">Automatic Update</h3>
         <form id="autoUpdateForm" action="process_form.php" method="POST">
             <input type="hidden" name="form_type" value="auto_update">
             <div class="checkbox-container">
@@ -34,9 +34,9 @@
     
     <!-- Second Table: Manual Update -->
     <div class="table-container">
-        <h3 class="table-title">⚡ Manual Update</h3>
+        <h3 class="table-title">Manual Update</h3>
         <div class="manual-update-box">
-            <div class="update-icon">🔄</div>
+            <div class="update-icon">↻</div>
             <p style="margin-bottom: 20px; color: #666;">Click to manually update your data</p>
             <button class="btn btn-secondary" onclick="manualUpdate()">Update Now</button>
         </div>
@@ -44,7 +44,7 @@
     
     <!-- Third Table: CSV Upload Form -->
     <div class="table-container">
-        <h3 class="table-title">📊 CSV Upload</h3>
+        <h3 class="table-title">CSV Upload</h3>
         <form id="csvUploadForm" action="process_form.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="form_type" value="csv_upload">
             <div class="form-group">

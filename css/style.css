@@ -6,16 +6,16 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #f4f6f9;
     min-height: 100vh;
     padding: 20px;
 }
 
 .header {
-    background: white;
+    background: #ffffff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
@@ -23,12 +23,12 @@ body {
 }
 
 .welcome-text {
-    color: #333;
+    color: #2c3e50;
     margin: 0;
 }
 
 .logout-btn {
-    background-color: #dc3545;
+    background-color: #e74c3c;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -39,26 +39,25 @@ body {
 }
 
 .logout-btn:hover {
-    background-color: #c82333;
+    background-color: #c0392b;
 }
 
 .dashboard-content {
-    background: white;
+    background: #ffffff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .message {
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 4px;
-    background: #d4edda;
-    color: #155724;
+    background: #e9f7ef;
+    color: #2e7d32;
     text-align: center;
 }
 
-/* Paste all remaining CSS from your original code here */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -70,60 +69,27 @@ body {
 .table-container {
     flex: 1;
     min-width: 300px;
-    background: rgba(255, 255, 255, 0.95);
+    background: #ffffff;
     border-radius: 15px;
     padding: 25px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 20px;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.table-container {
-    flex: 1;
-    min-width: 300px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid #e0e0e0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .table-container:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 .table-title {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: #2c3e50;
     font-size: 18px;
     font-weight: 600;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #3498db;
     padding-bottom: 10px;
 }
 
@@ -154,8 +120,8 @@ select, input[type="time"], input[type="file"] {
 
 select:focus, input[type="time"]:focus, input[type="file"]:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 .btn {
@@ -172,53 +138,53 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #3498db;
     color: white;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: #e67e22;
     color: white;
 }
 
 .btn-secondary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(245, 87, 108, 0.3);
+    box-shadow: 0 10px 20px rgba(230, 126, 34, 0.2);
 }
 
 .btn-success {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: #2ecc71;
     color: white;
 }
 
 .btn-success:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
 }
 
 .manual-update-box {
     text-align: center;
     padding: 40px 20px;
-    border: 3px dashed #667eea;
+    border: 3px dashed #3498db;
     border-radius: 15px;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    background: #ecf0f1;
     transition: all 0.3s ease;
 }
 
 .manual-update-box:hover {
-    border-color: #764ba2;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-color: #2980b9;
+    background: #e0eaf6;
 }
 
 .update-icon {
     font-size: 48px;
-    color: #667eea;
+    color: #3498db;
     margin-bottom: 15px;
 }
 
@@ -237,7 +203,7 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
     align-items: center;
     margin-bottom: 20px;
     padding: 15px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    background: #ecf0f1;
     border-radius: 8px;
 }
 
@@ -245,22 +211,22 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
     .container {
         flex-direction: column;
     }
-    
+
     .table-container {
         min-width: 100%;
     }
-    
+
     .job-table th,
     .job-table td {
         padding: 8px 6px;
         font-size: 12px;
     }
-    
+
     .action-btn {
         padding: 4px 8px;
         font-size: 10px;
     }
-    
+
     .status-badge {
         padding: 4px 8px;
         font-size: 10px;
@@ -272,27 +238,26 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
     .job-table td:nth-child(2) {
         display: none;
     }
-    
+
     .job-table th,
     .job-table td {
         padding: 10px 4px;
         font-size: 11px;
     }
-    
+
     .table-title {
         font-size: 16px;
     }
-    
+
     .starting-time {
         font-size: 10px;
     }
 }
 
-/* Job History Table Styles */
 .table-wrapper {
     overflow-x: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .job-table {
@@ -304,7 +269,7 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
 }
 
 .job-table th {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #2c3e50;
     color: white;
     padding: 15px 10px;
     text-align: left;
@@ -318,11 +283,11 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
     padding: 12px 10px;
     border-bottom: 1px solid #e0e0e0;
     font-size: 14px;
-    color: #333;
+    color: #2c3e50;
 }
 
 .job-table tr:hover {
-    background-color: #f8f9fa;
+    background-color: #f4f6f9;
 }
 
 .job-table tr:last-child td {
@@ -331,18 +296,18 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
 
 .no-jobs {
     text-align: center;
-    color: #666;
+    color: #999;
     font-style: italic;
     padding: 30px !important;
 }
 
 .job-name {
     font-weight: 600;
-    color: #667eea;
+    color: #2980b9;
 }
 
 .starting-time {
-    color: #666;
+    color: #7f8c8d;
     font-family: 'Courier New', monospace;
 }
 
@@ -356,17 +321,17 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
 }
 
 .status-sent {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
+    background: #2ecc71;
     color: white;
 }
 
 .status-processing {
-    background: linear-gradient(135deg, #ff9800, #f57c00);
+    background: #f39c12;
     color: white;
 }
 
 .status-completed {
-    background: linear-gradient(135deg, #2196F3, #1976D2);
+    background: #3498db;
     color: white;
 }
 
@@ -383,21 +348,100 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
 }
 
 .btn-cancel {
-    background: linear-gradient(135deg, #f44336, #d32f2f);
+    background: #e74c3c;
     color: white;
 }
 
 .btn-cancel:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
 }
 
 .btn-rollback {
-    background: linear-gradient(135deg, #ff9800, #f57c00);
+    background: #f39c12;
     color: white;
 }
 
 .btn-rollback:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(243, 156, 18, 0.3);
+}
+
+
+
+/* // Buttons  */
+.btn {
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn-primary {
+    background: #2980b9;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #2471a3;
+    box-shadow: 0 6px 16px rgba(41, 128, 185, 0.2);
+}
+
+.btn-secondary {
+    background: #d35400;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background: #ba4a00;
+    box-shadow: 0 6px 16px rgba(211, 84, 0, 0.2);
+}
+
+.btn-success {
+    background: #27ae60;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: #229954;
+    box-shadow: 0 6px 16px rgba(39, 174, 96, 0.2);
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-transform: capitalize;
+    letter-spacing: 0.3px;
+}
+
+.btn-cancel {
+    background: #c0392b;
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    background: #a93226;
+    box-shadow: 0 4px 12px rgba(192, 57, 43, 0.25);
+}
+
+.btn-rollback {
+    background: #e67e22;
+    color: #fff;
+}
+
+.btn-rollback:hover {
+    background: #ca6f1e;
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.25);
 }
