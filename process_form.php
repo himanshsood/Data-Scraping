@@ -84,37 +84,6 @@ function handleAutoUpdate() {
     $_SESSION['message'] = "Automatic update scheduled for $day at $time";
     header('Location: index.php');
     exit();
-
-    // Example: Send to Express API
-    /*
-    $postData = json_encode([
-        'day' => $day,
-        'time' => $time,
-        'jobName' => $jobName,
-        'enabled' => $enabled
-    ]);
-
-    $ch = curl_init('http://localhost:3000/schedule-update');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-
-    $responseData = json_decode($response, true);
-
-    if ($httpCode === 200 && $responseData['success']) {
-        $statusText = $enabled ? "enabled" : "disabled";
-        $_SESSION['message'] = "Automatic update $statusText for $day at $time";
-    } else {
-        $_SESSION['message'] = $responseData['message'] ?? "Error scheduling update. Please contact developers.";
-    }
-
-    header('Location: index.php');
-    exit();
-    */
 }
 
 // --- HANDLE CSV UPLOAD FORM ---
@@ -156,39 +125,6 @@ function handleCsvUpload() {
         $_SESSION['message'] = "CSV file uploaded successfully for $gender";
         header('Location: index.php');
         exit();
-
-        // Optional: Forward file to backend API
-        /*
-        $apiUrl = "https://your-backend-api.com/upload";
-        $curl = curl_init();
-        $postFields = [
-            'jobId' => count($_SESSION['jobHistory']) + 1,
-            'jobName' => $jobName,
-            'startTime' => date('m/d/Y h:i:s A'),
-            'status' => "Sent to Monday",
-            'csvFile' => new CURLFile($targetFile, 'text/csv', basename($targetFile))
-        ];
-        curl_setopt_array($curl, [
-            CURLOPT_URL => $apiUrl,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => $postFields
-        ]);
-        $response = curl_exec($curl);
-        $error = curl_error($curl);
-        curl_close($curl);
-
-        if ($error) {
-            $_SESSION['message'] = "Upload failed: API error - $error";
-            header('Location: index.php');
-            exit();
-        }
-
-        addJobToHistory($jobName, "Sent to Monday");
-        $_SESSION['message'] = "CSV uploaded and sent to API for $gender";
-        header('Location: index.php');
-        exit();
-        */
     } else {
         $_SESSION['message'] = "Error uploading your file";
         header('Location: index.php');
