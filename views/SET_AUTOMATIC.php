@@ -1,15 +1,14 @@
-
     <div class="container">
         <!-- First Table: Automatic Update Form -->
         <div class="table-containerr">
             <h3 class="table-title">Automatic Update</h3>
 
             <!-- Display View -->
-            <div id="displayView" class="schedule-display">
+            <div id="displayView" class="schedule-display" style="display: <?php echo ($automatic ? 'block' : 'none'); ?>;">
                 <div class="schedule-info">
                     <div class="schedule-details">
                         <div class="schedule-label">Scheduled Day & Time:</div>
-                        <div class="schedule-value" id="currentSchedule">Wednesday at 5:00 PM</div>
+                        <div class="schedule-value" id="currentSchedule"><?php echo "$day $time"?></div>
                     </div>
                     <button type="button" class="btn btn-edit" onclick="showEditForm()">Edit</button>
                 </div>
@@ -20,12 +19,12 @@
             </div>
 
             <!-- Edit Form -->
-            <div id="editForm" class="edit-form" style="display: none;">
+            <div id="editForm" class="edit-form" style="display: <?php echo ($automatic ? 'none' : 'block'); ?>;">
                 <form id="autoUpdateForm" action="process_form.php" method="POST">
                     <input type="hidden" name="form_type" value="auto_update" />
 
                     <div class="checkbox-container">
-                        <input type="checkbox" id="enableAutoUpdate" name="enableAutoUpdate" checked />
+                        <input type="checkbox" id="enableAutoUpdate" name="enableAutoUpdate" <?php echo ($automatic ? 'checked' : ''); ?> />
                         <label for="enableAutoUpdate">Enable Automatic Update</label>
                     </div>
 
@@ -50,7 +49,7 @@
 
                     <div class="button-group">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelEdit()" style="display: <?php echo ($automatic) ? 'block' : 'none'; ?>;">Cancel</button>
                     </div>
                 </form>
             </div>

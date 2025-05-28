@@ -32,6 +32,42 @@ if (isset($_SESSION['message'])) {
     ";
     unset($_SESSION['message']);
 }
+
+
+$automatic = false;
+$day = "";
+$time = "";
+// Your Flask API endpoint URL
+$apiUrl = "http://localhost:5000/api/schedules/active";  // no trailing slash needed, backend has strict_slashes=False
+// Initialize cURL
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// Execute request
+$response = curl_exec($ch);
+if ($response === false) {
+    error_log("cURL Error: " . curl_error($ch));
+} else {
+    $data = json_decode($response, true);
+    if (
+        isset($data['status']) && $data['status'] === 'success' &&
+        isset($data['data']) && is_array($data['data']) && count($data['data']) > 0
+    ) {
+        $schedule = $data['data'][0];  // Note: 'data' key, not 'schedules'
+        // Check is_active explicitly (boolean true or 1)
+        if (isset($schedule['is_active']) && ($schedule['is_active'] === true || intval($schedule['is_active']) === 1)) {
+            $automatic = true;
+        } else {
+            $automatic = false;
+        }
+        $day = $schedule['day_of_week'] ?? "";
+        $time = $schedule['schedule_time'] ?? "";
+    }
+}
+curl_close($ch);
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -159,12 +195,18 @@ if (isset($_SESSION['message'])) {
                 timeSelect.style.opacity = '1';
                 submitBtn.style.opacity = '1';
             } else {
+                let deleteRequest = <?php echo ($automatic) ? 'true' : 'false'; ?>;
+                if(deleteRequest) {
+                    submitBtn.disabled = false;
+                }
+                else {
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.5';
+                }
                 daySelect.disabled = true;
                 timeSelect.disabled = true;
-                submitBtn.disabled = true;
                 daySelect.style.opacity = '0.5';
                 timeSelect.style.opacity = '0.5';
-                submitBtn.style.opacity = '0.5';
                 daySelect.value = '';
                 timeSelect.value = '';
             }
