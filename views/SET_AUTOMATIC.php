@@ -1,27 +1,14 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Update Dashboard</title>
-    
-</head>
-<body>
-=======
-
->>>>>>> 10275c17f55ccc5318320b4e6ebf0bc5a085e912
     <div class="container">
         <!-- First Table: Automatic Update Form -->
         <div class="table-containerr">
             <h3 class="table-title">Automatic Update</h3>
 
             <!-- Display View -->
-            <div id="displayView" class="schedule-display">
+            <div id="displayView" class="schedule-display" style="display: <?php echo ($automatic ? 'block' : 'none'); ?>;">
                 <div class="schedule-info">
                     <div class="schedule-details">
                         <div class="schedule-label">Scheduled Day & Time:</div>
-                        <div class="schedule-value" id="currentSchedule">Wednesday at 5:00 PM</div>
+                        <div class="schedule-value" id="currentSchedule"><?php echo "$day $time"?></div>
                     </div>
                     <button type="button" class="btn btn-edit" onclick="showEditForm()">Edit</button>
                 </div>
@@ -32,12 +19,12 @@
             </div>
 
             <!-- Edit Form -->
-            <div id="editForm" class="edit-form" style="display: none;">
+            <div id="editForm" class="edit-form" style="display: <?php echo ($automatic ? 'none' : 'block'); ?>;">
                 <form id="autoUpdateForm" action="process_form.php" method="POST">
                     <input type="hidden" name="form_type" value="auto_update" />
 
                     <div class="checkbox-container">
-                        <input type="checkbox" id="enableAutoUpdate" name="enableAutoUpdate" checked />
+                        <input type="checkbox" id="enableAutoUpdate" name="enableAutoUpdate" <?php echo ($automatic ? 'checked' : ''); ?> />
                         <label for="enableAutoUpdate">Enable Automatic Update</label>
                     </div>
 
@@ -62,25 +49,13 @@
 
                     <div class="button-group">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Cancel</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelEdit()" style="display: <?php echo ($automatic) ? 'block' : 'none'; ?>;">Cancel</button>
                     </div>
                 </form>
             </div>
         </div>
 
         <!-- Second Table: Manual Update -->
-<<<<<<< HEAD
-       <div class="table-container">
-    <h3 class="table-title">Manual Update</h3>
-    <div class="manual-update-box">
-        <div class="update-icon">↻</div>
-        <p style="margin-bottom: 20px; color: #666;">Click to manually update your data</p>
-        <button id="manualUpdateBtn" class="btn btn-secondary">Update Now</button>
-        <p id="updateStatus" style="margin-top:10px; color: #007bff; display:none;">Update in progress... ⏳</p>
-        <p id="updateComplete" style="margin-top:10px; color: green; display:none;">Update completed! ✅</p>
-    </div>
-</div>
-=======
         <div class="table-container">
             <h3 class="table-title">Manual Update</h3>
             <div class="manual-update-box">
@@ -89,7 +64,6 @@
                 <button class="btn btn-secondary updatenowbutton" onclick="manualUpdate()">Update Now</button>
             </div>
         </div>
->>>>>>> 10275c17f55ccc5318320b4e6ebf0bc5a085e912
 
         <!-- Third Table: CSV Upload Form -->
         <div class="table-container">
