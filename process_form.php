@@ -166,39 +166,6 @@ function handleCsvUpload() {
         $_SESSION['message'] = "CSV file uploaded successfully for $gender";
         header('Location: index.php');
         exit();
-
-        // Optional: Forward file to backend API
-        /*
-        $apiUrl = "https://your-backend-api.com/upload";
-        $curl = curl_init();
-        $postFields = [
-            'jobId' => count($_SESSION['jobHistory']) + 1,
-            'jobName' => $jobName,
-            'startTime' => date('m/d/Y h:i:s A'),
-            'status' => "Sent to Monday",
-            'csvFile' => new CURLFile($targetFile, 'text/csv', basename($targetFile))
-        ];
-        curl_setopt_array($curl, [
-            CURLOPT_URL => $apiUrl,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => $postFields
-        ]);
-        $response = curl_exec($curl);
-        $error = curl_error($curl);
-        curl_close($curl);
-
-        if ($error) {
-            $_SESSION['message'] = "Upload failed: API error - $error";
-            header('Location: index.php');
-            exit();
-        }
-
-        addJobToHistory($jobName, "Sent to Monday");
-        $_SESSION['message'] = "CSV uploaded and sent to API for $gender";
-        header('Location: index.php');
-        exit();
-        */
     } else {
         $_SESSION['message'] = "Error uploading your file";
         header('Location: index.php');

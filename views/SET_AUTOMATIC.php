@@ -90,8 +90,10 @@
             </form>
 
             <!-- Progress & Result Message -->
-            <div id="progressMessage" style="margin-top: 15px; font-weight: bold;"></div>
-
+            <div id="progressContainer" style="display: none; margin-top: 10px;">
+    <progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+    <p id="progressMessage">Uploading...</p>
+</div>
 
         </div>
     </div>
@@ -197,12 +199,16 @@ document.getElementById("csvFile").addEventListener("change", function () {
 });
 
 document.getElementById("csvUploadForm").addEventListener("submit", function (e) {
-    e.preventDefault(); // Stop normal form submission
+    e.preventDefault();
 
     const form = e.target;
     const formData = new FormData(form);
+    const progressContainer = document.getElementById("progressContainer");
+    const progressBar = document.getElementById("progressBar");
     const progressMessage = document.getElementById("progressMessage");
 
+    progressContainer.style.display = "block";
+    progressBar.value = 0;
     progressMessage.textContent = "Uploading CSV...";
 
     fetch("http://localhost:5000/api/updates/csv", {
@@ -210,34 +216,31 @@ document.getElementById("csvUploadForm").addEventListener("submit", function (e)
         body: formData
     })
     .then(async res => {
-        const contentType = res.headers.get("content-type");
-        let data;
-
-        if (!contentType || !contentType.includes("application/json")) {
+        const contentType = res.headers.get("content-type") || "";
+        if (!contentType.includes("application/json")) {
             throw new Error("Invalid response from server");
         }
 
-        data = await res.json();
-
+        const data = await res.json();
         if (!res.ok) {
-            throw new Error(data.message || "Server error");
+            throw new Error(data.message || `Server Error: ${res.status}`);
         }
 
-        if (data.status === "success" && data.run_id) {
+        if (data.status === "success" || data.data || data.data.run_id) {
             progressMessage.textContent = "Upload successful. Monitoring progress...";
-            pollProgress(data.run_id);
+            pollProgress(data.data.run_id);
         } else {
-            throw new Error(data.message || "Unknown error");
+            throw new Error(data.message || "Unknown error occurred");
         }
     })
     .catch(err => {
         console.error("Upload error:", err);
         progressMessage.textContent = `Upload error: ${err.message}`;
     });
-
 });
 
 function pollProgress(runId) {
+    const progressBar = document.getElementById("progressBar");
     const progressMessage = document.getElementById("progressMessage");
 
     function check() {
@@ -245,10 +248,12 @@ function pollProgress(runId) {
             .then(res => res.json())
             .then(data => {
                 if (data.status === "success") {
-                    progressMessage.textContent = `Progress: ${data.progress}% - ${data.message}`;
+                    const progress = data.progress || 0;
+                    progressBar.value = progress;
+                    progressMessage.textContent = `Progress: ${progress}% - ${data.message}`;
 
-                    if (data.progress < 100) {
-                        setTimeout(check, 2000); // Keep polling
+                    if (progress < 100) {
+                        setTimeout(check, 2000);
                     } else {
                         progressMessage.textContent = "✅ Update completed successfully!";
                     }
@@ -262,6 +267,6 @@ function pollProgress(runId) {
             });
     }
 
-    check(); // Start polling
+    check();
 }
-    </script>
+</script>
