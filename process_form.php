@@ -14,28 +14,60 @@ if (!isset($_SESSION['jobHistory'])) {
 
 // --- HANDLE POST REQUESTS ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Manual Update Triggered via AJAX
+    // Start a manual update
     if (isset($_POST['manual_update'])) {
-        echo json_encode(['success' => true, 'message' => 'Manual update completed']);
+        $apiUrl = 'http://localhost:5000/api/updates/start';
+
+        $ch = curl_init($apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, []); // No payload
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        $responseData = json_decode($response, true);
+
+        if ($httpCode === 202 && isset($responseData['run_id'])) {
+            echo json_encode([
+                'success' => true,
+                'run_id' => $responseData['run_id'],
+                'message' => 'Manual update started (Run ID: ' . $responseData['run_id'] . ')'
+            ]);
+        } else {
+            $errorMessage = $responseData['message'] ?? 'Unknown error from backend';
+            echo json_encode(['success' => false, 'message' => "Manual update failed: $errorMessage"]);
+        }
         exit();
     }
 
-    // Handle Different Form Submissions
-    $formType = $_POST['form_type'] ?? '';
-    switch ($formType) {
-        case 'auto_update':
-            handleAutoUpdate();
-            break;
-        case 'csv_upload':
-            handleCsvUpload();
-            break;
-        default:
-            $_SESSION['message'] = "Invalid form submission";
-            header('Location: index.php');
+    // Polling progress check
+    if (isset($_POST['check_progress']) && isset($_POST['run_id'])) {
+        $runId = intval($_POST['run_id']);
+        $statusApiUrl = "http://localhost:5000/api/updates/progress/$runId";
+
+        $ch = curl_init($statusApiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET'); // <-- explicitly set GET method
+
+        $response = curl_exec($ch);
+
+        if ($response === false) {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'cURL error: ' . curl_error($ch)
+            ]);
+            curl_close($ch);
             exit();
+        }
+
+curl_close($ch);
+$responseData = json_decode($response, true);
+echo json_encode($responseData);
+exit();
+
     }
 }
-
 // --- HANDLE AUTO UPDATE FORM ---
 function handleAutoUpdate() {
     $day = $_POST['day'] ?? '';
