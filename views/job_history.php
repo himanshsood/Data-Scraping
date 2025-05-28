@@ -27,7 +27,8 @@ if (!curl_errno($ch)) {
                 'id' => $row['id'] ?? 'N/A',
                 'started_at' => $row['started_at'] ?? 'N/A',
                 'trigger_type' => $row['trigger_type'] ?? 'N/A',
-                'status' => $statusMap[$row['status']] ?? 'UNKNOWN'
+                'status' => $statusMap[$row['status']] ?? 'UNKNOWN',
+                'statusCode' => $row['status'] ,
             ];
         }
     }
@@ -91,7 +92,19 @@ if (!curl_errno($ch)) {
                     <td><?= htmlspecialchars($row['id']) ?></td>
                     <td><?= htmlspecialchars($row['started_at']) ?></td>
                     <td><?= htmlspecialchars($row['trigger_type']) ?></td>
-                    <td><?= htmlspecialchars($row['status']) ?></td>
+                    <td style="display:flex;align-items:center;">
+                        <?= htmlspecialchars($row['status']) ?>&nbsp;&nbsp;&nbsp;
+                        <?php if ($row['statusCode'] < 5): ?>
+                            <button onClick="CancelFunction(<?= htmlspecialchars($row['id']) ?>)" style="
+                                padding: 6px 12px;
+                                border-radius: 6px;
+                                background-color: #dc3545;
+                                color: white;
+                                border: none;
+                                cursor: pointer;
+                            ">Cancel</button>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         <?php endif; ?>
