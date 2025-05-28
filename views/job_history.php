@@ -42,15 +42,23 @@ if (!curl_errno($ch)) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
+            padding:0px;
+            
         }
-        h2 {
-            margin-bottom: 20px;
+        h2{
+            text-align:center;
+            padding:10px;
+            margin:0px;
+            border-bottom:3px solid #3498db ; 
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            width: 100%;
         }
         table {
-            width: 80%;
+            min-width:768px; 
+            width: 100%;
             border-collapse: collapse;
-            margin:auto;
         }
         th, td {
             padding: 12px;
@@ -63,17 +71,14 @@ if (!curl_errno($ch)) {
         tr:nth-child(even) {
             background-color: #fafafa;
         }
-        .recent-updates{
-            margin-left:520px;
-        }
     </style>
 </head>
 <body>
 <br>
 <br>
-<br><br>
-<h2 class="recent-updates">Recent Updates</h2>
-
+<h2 class="recent-updates" style="font-size:30px;font-weight:400;">Recent Updates</h2>
+<br>
+<div class="table-wrapper">
 <table>
     <thead>
         <tr>
@@ -110,6 +115,6 @@ if (!curl_errno($ch)) {
         <?php endif; ?>
     </tbody>
 </table>
-
+                        </div>
 </body>
 </html>
