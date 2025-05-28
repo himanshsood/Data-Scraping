@@ -5,10 +5,10 @@
 
             <!-- Display View -->
             <div id="displayView" class="schedule-display" style="display: <?php echo ($automatic ? 'block' : 'none'); ?>;">
-                <div class="schedule-info">
+                <div class="schedule-info" style="display:flex;flex-direction:column;row-gap:10px;">
                     <div class="schedule-details">
-                        <div class="schedule-label">Scheduled Day & Time:</div>
-                        <div class="schedule-value" id="currentSchedule"><?php echo "$day $time"?></div>
+                        <div class="schedule-label" style="font-size:20px;color:black;">Scheduled Day & Time:</div>
+                        <div class="schedule-value" id="currentSchedule"><?php echo ucfirst(trim($day)) . " $time"; ?></div>
                     </div>
                     <button type="button" class="btn btn-edit" onclick="showEditForm()">Edit</button>
                 </div>
