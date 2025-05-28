@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,9 @@
     
 </head>
 <body>
+=======
+
+>>>>>>> 10275c17f55ccc5318320b4e6ebf0bc5a085e912
     <div class="container">
         <!-- First Table: Automatic Update Form -->
         <div class="table-containerr">
@@ -65,6 +69,7 @@
         </div>
 
         <!-- Second Table: Manual Update -->
+<<<<<<< HEAD
        <div class="table-container">
     <h3 class="table-title">Manual Update</h3>
     <div class="manual-update-box">
@@ -75,6 +80,16 @@
         <p id="updateComplete" style="margin-top:10px; color: green; display:none;">Update completed! ✅</p>
     </div>
 </div>
+=======
+        <div class="table-container">
+            <h3 class="table-title">Manual Update</h3>
+            <div class="manual-update-box">
+                <div class="update-icon">↻</div>
+                <p style="margin-bottom: 20px; color: #666;">Click to manually update your data</p>
+                <button class="btn btn-secondary updatenowbutton" onclick="manualUpdate()">Update Now</button>
+            </div>
+        </div>
+>>>>>>> 10275c17f55ccc5318320b4e6ebf0bc5a085e912
 
         <!-- Third Table: CSV Upload Form -->
         <div class="table-container">
@@ -203,5 +218,3 @@ function pollUpdateStatus(runId) {
 }
 
     </script>
-</body>
-</html>
