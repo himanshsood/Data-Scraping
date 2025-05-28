@@ -1,16 +1,4 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Update Dashboard</title>
-    
-</head>
-<body>
-=======
 
->>>>>>> 10275c17f55ccc5318320b4e6ebf0bc5a085e912
     <div class="container">
         <!-- First Table: Automatic Update Form -->
         <div class="table-containerr">
@@ -69,7 +57,6 @@
         </div>
 
         <!-- Second Table: Manual Update -->
-<<<<<<< HEAD
        <div class="table-container">
     <h3 class="table-title">Manual Update</h3>
     <div class="manual-update-box">
@@ -80,44 +67,33 @@
         <p id="updateComplete" style="margin-top:10px; color: green; display:none;">Update completed! ✅</p>
     </div>
 </div>
-=======
-        <div class="table-container">
-            <h3 class="table-title">Manual Update</h3>
-            <div class="manual-update-box">
-                <div class="update-icon">↻</div>
-                <p style="margin-bottom: 20px; color: #666;">Click to manually update your data</p>
-                <button class="btn btn-secondary updatenowbutton" onclick="manualUpdate()">Update Now</button>
-            </div>
-        </div>
->>>>>>> 10275c17f55ccc5318320b4e6ebf0bc5a085e912
 
         <!-- Third Table: CSV Upload Form -->
         <div class="table-container">
             <h3 class="table-title">CSV Upload</h3>
-            <form id="csvUploadForm" action="process_form.php" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="form_type" value="csv_upload" />
-
+           <form id="csvUploadForm" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="genderSelect">Select Gender:</label>
-                    <select id="genderSelect" name="gender" required>
+                    <select id="genderSelect" name="board_type" required>
                         <option value="">Choose gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="men">Male</option>
+                        <option value="women">Female</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="csvFile">Choose CSV File:</label>
-                    <input type="file" id="csvFile" name="csvFile" accept=".csv" required />
+                    <input type="file" id="csvFile" name="file" accept=".csv" required />
                 </div>
 
-                <div class="form-group">
-                    <label>Selected File:</label>
-                    <div class="file-name-display" id="fileNameDisplay">No file selected</div>
-                </div>
-
+                
                 <button type="submit" class="btn btn-success">Send to Monday</button>
             </form>
+
+            <!-- Progress & Result Message -->
+            <div id="progressMessage" style="margin-top: 15px; font-weight: bold;"></div>
+
+
         </div>
     </div>
 
@@ -216,5 +192,77 @@ function pollUpdateStatus(runId) {
         });
     }, 2000);
 }
+document.getElementById("csvFile").addEventListener("change", function () {
+    const fileName = this.files[0]?.name || "No file selected";
+    document.getElementById("fileNameDisplay").textContent = fileName;
+});
 
+document.getElementById("csvUploadForm").addEventListener("submit", function (e) {
+    e.preventDefault(); // Stop normal form submission
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const progressMessage = document.getElementById("progressMessage");
+
+    progressMessage.textContent = "Uploading CSV...";
+
+    fetch("http://localhost:5000/api/updates/csv", {
+        method: "POST",
+        body: formData
+    })
+    .then(async res => {
+        const contentType = res.headers.get("content-type");
+        let data;
+
+        if (!contentType || !contentType.includes("application/json")) {
+            throw new Error("Invalid response from server");
+        }
+
+        data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.message || "Server error");
+        }
+
+        if (data.status === "success" && data.run_id) {
+            progressMessage.textContent = "Upload successful. Monitoring progress...";
+            pollProgress(data.run_id);
+        } else {
+            throw new Error(data.message || "Unknown error");
+        }
+    })
+    .catch(err => {
+        console.error("Upload error:", err);
+        progressMessage.textContent = `Upload error: ${err.message}`;
+    });
+
+});
+
+function pollProgress(runId) {
+    const progressMessage = document.getElementById("progressMessage");
+
+    function check() {
+        fetch(`http://localhost:5000/api/updates/progress/${runId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    progressMessage.textContent = `Progress: ${data.progress}% - ${data.message}`;
+
+                    if (data.progress < 100) {
+                        setTimeout(check, 2000); // Keep polling
+                    } else {
+                        progressMessage.textContent = "✅ Update completed successfully!";
+                    }
+                } else {
+                    progressMessage.textContent = "⚠️ Progress check failed.";
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                progressMessage.textContent = "❌ Error while checking progress.";
+            });
+    }
+
+    check(); // Start polling
+}
     </script>
