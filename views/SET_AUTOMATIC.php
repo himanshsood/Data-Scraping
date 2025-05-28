@@ -1,6 +1,6 @@
     <div class="container">
         <!-- First Table: Automatic Update Form -->
-        <div class="table-containerr">
+        <div class="table-container">
             <h3 class="table-title">Automatic Update</h3>
 
             <!-- Display View -->
