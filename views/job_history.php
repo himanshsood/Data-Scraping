@@ -99,7 +99,7 @@ if (!curl_errno($ch)) {
                     <td><?= htmlspecialchars($row['trigger_type']) ?></td>
                     <td style="display:flex;align-items:center;">
                         <?= htmlspecialchars($row['status']) ?>&nbsp;&nbsp;&nbsp;
-                        <?php if ($row['statusCode'] < 5): ?>
+                        <?php if ($row['statusCode'] < 4): ?>
                             <button onClick="CancelFunction(<?= htmlspecialchars($row['id']) ?>)" style="
                                 padding: 6px 12px;
                                 border-radius: 6px;

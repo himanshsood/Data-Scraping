@@ -106,7 +106,7 @@ curl_close($ch);
         <!-- Forms Section -->
         <?php include 'views/SET_AUTOMATIC.php'; ?>
         <!-- Job History Section -->
-        <?php include 'views/JOB_HISTORY.php'; ?>
+        <?php include 'views/job_history.php'; ?>
     </div>
 
     <script>
