@@ -7,7 +7,7 @@
             $time = $_POST['time'] ?? '00:00';
             $enabled = isset($_POST['enableAutoUpdate']);
 
-            $apiUrl = 'http://3.234.76.112:5000/api/schedules';
+            $apiUrl = 'http://localhost:5000/api/schedules';
             $postData = json_encode([
                 'time' => $time,           // key fixed
                 'day' => $day,             // key fixed

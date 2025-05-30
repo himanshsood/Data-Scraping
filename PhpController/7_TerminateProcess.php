@@ -3,7 +3,7 @@
     if (isset($_POST['terminate_run'])) {
         // echo or alert here to see weather this funciton has received the id or not
         $runId = intval($_POST['terminate_run']);
-        $apiUrl = "http://3.234.76.112:5000/api/updates/terminate/$runId";
+        $apiUrl = "http://localhost:5000/api/updates/terminate/$runId";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $apiUrl);

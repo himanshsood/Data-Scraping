@@ -1,7 +1,7 @@
 <?php 
     // Start a manual update
     if (isset($_POST['manual_update'])) {
-        $apiUrl = 'http://3.234.76.112:5000/api/updates/start';
+        $apiUrl = 'http://localhost:5000/api/updates/start';
 
         $ch = curl_init($apiUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

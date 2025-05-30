@@ -31,7 +31,7 @@ document.getElementById("csvUploadForm").addEventListener("submit", function (e)
     // progressBar.value = 0;
     progressMessage.textContent = "Uploading CSV...";
 
-    fetch("http://3.234.76.112:5000/api/updates/csv/preview", {
+    fetch("http://localhost:5000/api/updates/csv/preview", {
         method: "POST",
         body: formData
     })

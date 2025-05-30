@@ -1,7 +1,7 @@
 <?php 
     if (isset($_POST['check_progress']) && isset($_POST['run_id'])) {
         $runId = intval($_POST['run_id']);
-        $statusApiUrl = "http://3.234.76.112:5000/api/updates/progress/$runId";
+        $statusApiUrl = "http://localhost:5000/api/updates/progress/$runId";
 
         $ch = curl_init($statusApiUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

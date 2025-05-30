@@ -1,6 +1,6 @@
 <?php
     // FETCHING API
-    $apiUrl = 'http://3.234.76.112:5000/api/updates/recent';
+    $apiUrl = 'http://localhost:5000/api/updates/recent';
     $statusMap = [
         0 => 'PENDING',
         1 => 'INITIALIZED',

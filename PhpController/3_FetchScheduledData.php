@@ -3,7 +3,7 @@
 $automatic = false;
 $day = "";
 $time = "";
-    $apiUrl = "http://3.234.76.112:5000/api/schedules/active";  // no trailing slash needed, backend has strict_slashes=False
+    $apiUrl = "http://localhost:5000/api/schedules/active";  // no trailing slash needed, backend has strict_slashes=False
     // Initialize cURL
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $apiUrl);
