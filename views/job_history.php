@@ -1,40 +1,3 @@
-<?php
-$apiUrl = 'http://localhost:5000/api/updates/recent';
-
-$statusMap = [
-    0 => 'PENDING',
-    1 => 'INITIALIZED',
-    2 => 'FETCHING',
-    3 => 'MERGING',
-    4 => 'UPLOADING',
-    5 => 'COMPLETED',
-    6 => 'FAILED',
-    7 => 'TERMINATED'
-];
-
-$ch = curl_init($apiUrl);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$response = curl_exec($ch);
-curl_close($ch);
-
-$dataRows = [];
-
-if (!curl_errno($ch)) {
-    $data = json_decode($response, true);
-    if ($data && isset($data['status']) && $data['status'] === 'success') {
-        foreach ($data['data'] as $row) {
-            $dataRows[] = [
-                'id' => $row['id'] ?? 'N/A',
-                'started_at' => $row['started_at'] ?? 'N/A',
-                'trigger_type' => $row['trigger_type'] ?? 'N/A',
-                'status' => $statusMap[$row['status']] ?? 'UNKNOWN',
-                'statusCode' => $row['status'] ,
-            ];
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,6 +34,24 @@ if (!curl_errno($ch)) {
         tr:nth-child(even) {
             background-color: #fafafa;
         }
+        .pagination {
+            margin: 20px auto;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .pagination a {
+            padding: 10px 20px;
+            text-decoration: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 6px;
+        }
+        .pagination a.disabled {
+            background-color: #ccc;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -82,19 +63,19 @@ if (!curl_errno($ch)) {
 <table>
     <thead>
         <tr>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Start Time</th>
             <th>Trigger Type</th>
             <th>Status</th>
         </tr>
     </thead>
     <tbody>
-        <?php if (empty($dataRows)): ?>
+        <?php if (empty($paginatedRows)): ?>
             <tr><td colspan="4">No data available or failed to fetch API.</td></tr>
         <?php else: ?>
-            <?php foreach ($dataRows as $row): ?>
+            <?php foreach ($paginatedRows as $row): ?>
                 <tr>
-                    <td><?= htmlspecialchars($row['id']) ?></td>
+                    <!-- <td> here we can display process id if we want => htmlspecialchars($row['id']) </td> -->
                     <td><?= htmlspecialchars($row['started_at']) ?></td>
                     <td><?= htmlspecialchars($row['trigger_type']) ?></td>
                     <td style="display:flex;align-items:center;">
@@ -115,6 +96,19 @@ if (!curl_errno($ch)) {
         <?php endif; ?>
     </tbody>
 </table>
-                        </div>
-</body>
-</html>
+</div>
+
+<!-- Pagination Buttons -->
+<div class="pagination">
+    <?php if ($page > 1): ?>
+        <a href="?page=<?= $page - 1 ?>">Previous</a>
+    <?php else: ?>
+        <a class="disabled">Previous</a>
+    <?php endif; ?>
+
+    <?php if ($page < $totalPages): ?>
+        <a href="?page=<?= $page + 1 ?>">Next</a>
+    <?php else: ?>
+        <a class="disabled">Next</a>
+    <?php endif; ?>
+</div>

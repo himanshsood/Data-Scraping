@@ -1,27 +1,14 @@
 <?php
 session_start();
 
-// Check if already logged in
+// CHECK AUTH
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     header('Location: index.php');
     exit();
 }
 
-// Handle login form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
-    
-    // Validate credentials (in real app, check against database)
-    if ($username === 'admin' && $password === 'admin123') {
-        $_SESSION['logged_in'] = true;
-        $_SESSION['username'] = $username;
-        header('Location: index.php');
-        exit();
-    } else {
-        $error = "Invalid username or password";
-    }
-}
+// HANDLE SUBMIT LOGIN FORM
+require './PhpController/1_HandleLogin.php' ; 
 ?>
 
 <!DOCTYPE html>
