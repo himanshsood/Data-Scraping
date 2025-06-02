@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+
+
+
 // 1) CHECK AUTH
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header('Location: login.php');
@@ -44,6 +47,8 @@ require './PhpController/8_FetchJobHistory.php' ;
         <?php include 'views/3_UploadCSV.php'; ?>
         <!-- Job History Section -->
         <?php include 'views/job_history.php'; ?>
+        <?php include 'views/4_Preview.php'; ?>
+        <?php include 'views/5_Loading.php' ; ?>
     </div>
 
 
@@ -80,14 +85,21 @@ require './PhpController/8_FetchJobHistory.php' ;
                 timeSelect.disabled = true;
                 daySelect.style.opacity = '0.5';
                 timeSelect.style.opacity = '0.5';
-                daySelect.value = '';
-                timeSelect.value = '';
+                daySelect.value = $day;
+                timeSelect.value = $time;
             }
         });
     </script>
+    <script src="./js/6_setUsersTime.js"></script>
     <script src="./js/1_AutomaticForm.js"></script>
     <script src="./js/2_ManualUpdateForm.js"></script>
     <script src="./js/3_UploadCSV.js"></script> 
     <script src="./js/4_TerminateProcess.js"></script>
+    <script src="./js/5_Lock.js"></script>
+    <script src="./js/7_SubmitCSVUpload.js"></script>
+    <script>
+        let isRunning = <?php echo json_encode($ISPROCESSRUNNING); ?>;
+        lock(isRunning);
+    </script>
 </body>
 </html>

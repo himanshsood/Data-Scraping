@@ -1,22 +1,3 @@
-// DISPLAY FILE NAME
-document.getElementById('csvFile').addEventListener('change', function(e) {
-    const fileNameDisplay = document.getElementById('fileNameDisplay');
-    const file = e.target.files[0];
-    
-    if (file) {
-        fileNameDisplay.textContent = file.name;
-        fileNameDisplay.style.color = '#333';
-        fileNameDisplay.style.fontStyle = 'normal';
-    } else {
-        fileNameDisplay.textContent = 'No file selected';
-        fileNameDisplay.style.color = '#666';
-        fileNameDisplay.style.fontStyle = 'italic';
-    }
-});
-
-
-
-
 // UPLOAD CSV LOGIC
 document.getElementById("csvUploadForm").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -24,14 +5,16 @@ document.getElementById("csvUploadForm").addEventListener("submit", function (e)
     const form = e.target;
     const formData = new FormData(form);
     const progressContainer = document.getElementById("progressContainer");
-    // const progressBar = document.getElementById("progressBar");
     const progressMessage = document.getElementById("progressMessage");
 
     progressContainer.style.display = "block";
-    // progressBar.value = 0;
     progressMessage.textContent = "Uploading CSV...";
 
-    fetch("http://localhost:5000/api/updates/csv/preview", {
+
+    const LOADING = document.getElementById('loadingOverlay') ; 
+    LOADING.style.display = 'flex';
+
+    fetch("http://3.234.76.112:5000/api/updates/csv/preview", {
         method: "POST",
         body: formData
     })
@@ -40,16 +23,62 @@ document.getElementById("csvUploadForm").addEventListener("submit", function (e)
         if (!contentType.includes("application/json")) {
             throw new Error("Invalid response from server");
         }
-
         const data = await res.json();
         if (!res.ok) {
             throw new Error(data.message || `Server Error: ${res.status}`);
         }
+        
+        if (data.status === "success" && data.data) {
+            
+            console.log(data) ; 
+            // Store CSV metadata in localStorage
+            if (data.last_csv_path && data.last_csv_type) {
+                localStorage.setItem("last_csv_path", data.last_csv_path);
+                localStorage.setItem("last_csv_type", data.last_csv_type);
+            }
 
-        if (data.status === "success" || data.data || data.data.run_id) {
-            progressMessage.textContent = "Upload successful. Monitoring progress...";
-            // pollProgress(data.data.run_id);
-            // WE ARE GOING TO WORK ON THIS SECTION ! 
+            const LOADING = document.getElementById('loadingOverlay');
+            LOADING.style.display = 'none';
+            // alert("DATA FETCH SUCCESSFULLY!");
+
+        // Populate table in modal
+        const popupTableContainer = document.getElementById("popupTableContainer");
+        const responseArray = data.data; // assuming this is the array
+
+        let tableHTML = "<table style='width: 100%; border-collapse: collapse;'>";
+        tableHTML += `
+        <thead>
+            <tr style='background: #f2f2f2;'>
+            <th style="border: 1px solid #ccc; padding: 8px;">Sr. No.</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Name</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">CM1</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">CM2</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">CM3</th>
+            </tr>
+        </thead><tbody>`;
+
+        responseArray.forEach((row, index) => {
+            const name = row.name || "";
+            const cm1 = row.new_ch1 || "";
+            const cm2 = row.current?.ch1 || "";
+            const cm3 = row.current?.ch2 || "";
+
+            tableHTML += `
+            <tr>
+                <td style="border: 1px solid #ccc; padding: 8px;">${index + 1}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">${name}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">${cm1}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">${cm2}</td>
+                <td style="border: 1px solid #ccc; padding: 8px;">${cm3}</td>
+            </tr>`;
+        });
+
+        tableHTML += "</tbody></table>";
+        popupTableContainer.innerHTML = tableHTML;
+
+        // Show the popup
+        document.getElementById("popupOverlay").style.display = "flex";
+
         } else {
             throw new Error(data.message || "Unknown error occurred");
         }
@@ -59,35 +88,3 @@ document.getElementById("csvUploadForm").addEventListener("submit", function (e)
         progressMessage.textContent = `Upload error: ${err.message}`;
     });
 });
-
-
-
-// // PROGRESS BAR LOGIC
-// function pollProgress(runId) {
-//     const progressBar = document.getElementById("progressBar");
-//     const progressMessage = document.getElementById("progressMessage");
-//     function check() {
-//         fetch(`http://localhost:5000/api/updates/progress/${runId}`)
-//             .then(res => res.json())
-//             .then(data => {
-//                 if (data.status === "success") {
-//                     const progress = data.progress || 0;
-//                     progressBar.value = progress;
-//                     progressMessage.textContent = `Progress: ${progress}% - ${data.message}`;
-
-//                     if (progress < 100) {
-//                         setTimeout(check, 2000);
-//                     } else {
-//                         progressMessage.textContent = "✅ Update completed successfully!";
-//                     }
-//                 } else {
-//                     progressMessage.textContent = "⚠️ Progress check failed.";
-//                 }
-//             })
-//             .catch(err => {
-//                 console.error(err);
-//                 progressMessage.textContent = "❌ Error while checking progress.";
-//             });
-//     }
-//     check();
-// }

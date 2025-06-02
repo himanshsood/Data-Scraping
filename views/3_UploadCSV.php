@@ -23,7 +23,7 @@
             <!-- Progress & Result Message -->
             <div id="progressContainer" style="display: none; margin-top: 10px;">
                 <!-- <progress id="progressBar" value="0" max="100" style="width: 100%;"></progress> -->
-                <p id="progressMessage">Uploading...</p>
+                <p id="progressMessage" style="display:none;">Uploading...</p>
             </div>
 
         </div>

@@ -8,7 +8,7 @@
             <div class="schedule-info" style="display:flex;flex-direction:column;row-gap:10px;">
                 <div class="schedule-details">
                     <div class="schedule-label" style="font-size:20px;color:black;">Scheduled Day & Time:</div>
-                    <div class="schedule-value" id="currentSchedule"><?php echo ucfirst(trim($day)) . " $time"; ?></div>
+                    <div class="schedule-value" id="currentSchedule"><?php echo ucfirst(trim($day)) ."  ". date("h:i A", strtotime($time)); ?></div>
                 </div>
                 <button type="button" class="btn btn-edit" onclick="showEditForm()">Edit</button>
             </div>
@@ -25,26 +25,26 @@
 
                 <div class="checkbox-container">
                     <input type="checkbox" id="enableAutoUpdate" name="enableAutoUpdate" <?php echo ($automatic ? 'checked' : ''); ?> />
-                    <label for="enableAutoUpdate">Enable Automatic Update</label>
+                    <label for="enableAutoUpdate"  style="margin:auto 0px;">Enable Automatic Update</label>
                 </div>
 
                 <div class="form-group">
                     <label for="daySelect">Select Day:</label>
                     <select id="daySelect" name="day" required>
-                        <option value="">Choose a day</option>
-                        <option value="monday">Monday</option>
-                        <option value="tuesday">Tuesday</option>
-                        <option value="wednesday" selected>Wednesday</option>
-                        <option value="thursday">Thursday</option>
-                        <option value="friday">Friday</option>
-                        <option value="saturday">Saturday</option>
-                        <option value="sunday">Sunday</option>
+                        <option value="" <?php echo ($day == '') ? 'selected' : ''; ?>>Choose a day</option>
+                        <option value="monday" <?php echo ($day == 'monday') ? 'selected' : ''; ?>>Monday</option>
+                        <option value="tuesday" <?php echo ($day == 'tuesday') ? 'selected' : ''; ?>>Tuesday</option>
+                        <option value="wednesday" <?php echo ($day == 'wednesday') ? 'selected' : ''; ?>>Wednesday</option>
+                        <option value="thursday" <?php echo ($day == 'thursday') ? 'selected' : ''; ?>>Thursday</option>
+                        <option value="friday" <?php echo ($day == 'friday') ? 'selected' : ''; ?>>Friday</option>
+                        <option value="saturday" <?php echo ($day == 'saturday') ? 'selected' : ''; ?>>Saturday</option>
+                        <option value="sunday" <?php echo ($day == 'sunday') ? 'selected' : ''; ?>>Sunday</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="timeSelect">Select Time:</label>
-                    <input type="time" id="timeSelect" name="time" value="17:00" required />
+                    <input type="time" id="timeSelect" name="time" value="<?php echo ($time) ? $time : '' ; ?>" required />
                 </div>
 
                 <div class="button-group">

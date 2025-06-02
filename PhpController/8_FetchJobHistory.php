@@ -1,6 +1,9 @@
 <?php
+    $ISPROCESSRUNNING = false ; // LOCK VARIABLE (LOCK PROCESS)
+
+
     // FETCHING API
-    $apiUrl = 'http://localhost:5000/api/updates/recent';
+    $apiUrl = 'http://3.234.76.112:5000/api/updates/recent';
     $statusMap = [
         0 => 'PENDING',
         1 => 'INITIALIZED',
@@ -38,6 +41,13 @@
     if (!curl_errno($ch)) {
         $data = json_decode($response, true);
         if ($data && isset($data['status']) && $data['status'] === 'success') {
+                        // LOCK : Check first entry's statusCode to determine if process is running
+                        if (isset($data['data'][0]['status']) && $data['data'][0]['status'] < 5) {
+                            $ISPROCESSRUNNING = true;
+                        }
+                        else{
+                            $ISPROCESSRUNNING = false ; 
+                        }
             foreach ($data['data'] as $row) {
                 $dataRows[] = [
                     'id' => $row['id'] ?? 'N/A',

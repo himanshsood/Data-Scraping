@@ -3,7 +3,7 @@
     if (isset($_POST['terminate_run'])) {
         // echo or alert here to see weather this funciton has received the id or not
         $runId = intval($_POST['terminate_run']);
-        $apiUrl = "http://localhost:5000/api/updates/terminate/$runId";
+        $apiUrl = "http://3.234.76.112:5000/api/updates/terminate/$runId";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $apiUrl);
@@ -21,7 +21,7 @@
 
         $responseData = json_decode($response, true);
         if ($httpCode >= 200 && $httpCode < 300 && isset($responseData['status']) && $responseData['status'] === 'success') {
-            echo json_encode(['status' => 'success', 'message' => 'Job terminated successfully.']);
+            echo json_encode(['status' => 'success']);
         } else {
             $message = $responseData['message'] ?? 'Termination failed. Please try again.';
             echo json_encode(['status' => 'error', 'message' => $message]);

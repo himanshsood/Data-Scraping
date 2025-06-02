@@ -600,3 +600,9 @@ select:focus, input[type="time"]:focus, input[type="file"]:focus {
 .updatenowbutton:hover {
     background-color: orange;
 }
+.disable {
+    background-color: rgb(179, 179, 179); 
+}
+.display_visible{
+    display:flex ; 
+}

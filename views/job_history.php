@@ -80,7 +80,7 @@
                     <td><?= htmlspecialchars($row['trigger_type']) ?></td>
                     <td style="display:flex;align-items:center;">
                         <?= htmlspecialchars($row['status']) ?>&nbsp;&nbsp;&nbsp;
-                        <?php if ($row['statusCode'] < 4): ?>
+                        <?php if ($row['statusCode'] < 5): ?>
                             <button onClick="CancelFunction(<?= htmlspecialchars($row['id']) ?>)" style="
                                 padding: 6px 12px;
                                 border-radius: 6px;
@@ -97,18 +97,43 @@
     </tbody>
 </table>
 </div>
-
 <!-- Pagination Buttons -->
-<div class="pagination">
+<div class="pagination" style="margin: 20px auto; width: 100%; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
     <?php if ($page > 1): ?>
-        <a href="?page=<?= $page - 1 ?>">Previous</a>
+        <a href="?page=<?= $page - 1 ?>" style="padding: 10px 16px; text-decoration: none; background-color: #3498db; color: white; border-radius: 6px; font-size: 14px;">Previous</a>
     <?php else: ?>
-        <a class="disabled">Previous</a>
+        <a class="disabled" style="padding: 10px 16px; text-decoration: none; background-color: #ccc; color: white; border-radius: 6px; font-size: 14px; pointer-events: none;">Previous</a>
+    <?php endif; ?>
+
+    <?php
+        $visiblePages = 3;
+        $startPage = max(1, $page - 1);
+        $endPage = min($totalPages, $startPage + $visiblePages - 1);
+        if ($endPage - $startPage < $visiblePages - 1) {
+            $startPage = max(1, $endPage - $visiblePages + 1);
+        }
+
+        if ($startPage > 1):
+            $prevBlur = $startPage - 1;
+    ?>
+        <a href="?page=<?= $prevBlur ?>" style="padding: 10px 16px; text-decoration: none; background-color: #e0e0e0; color: #333; border-radius: 6px; font-size: 14px; opacity: 0.4; filter: blur(1px);"> <?= $prevBlur ?> </a>
+    <?php endif; ?>
+
+    <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
+        <a href="?page=<?= $i ?>" style="padding: 10px 16px; text-decoration: none; border-radius: 6px; font-size: 14px; background-color: <?= $i == $page ? '#2c80b4' : '#3498db' ?>; color: white; font-weight: <?= $i == $page ? 'bold' : 'normal' ?>;">
+            <?= $i ?>
+        </a>
+    <?php endfor; ?>
+
+    <?php if ($endPage < $totalPages): 
+        $nextBlur = $endPage + 1;
+    ?>
+        <a href="?page=<?= $nextBlur ?>" style="padding: 10px 16px; text-decoration: none; background-color: #e0e0e0; color: #333; border-radius: 6px; font-size: 14px; opacity: 0.4; filter: blur(1px);"> <?= $nextBlur ?> </a>
     <?php endif; ?>
 
     <?php if ($page < $totalPages): ?>
-        <a href="?page=<?= $page + 1 ?>">Next</a>
+        <a href="?page=<?= $page + 1 ?>" style="padding: 10px 16px; text-decoration: none; background-color: #3498db; color: white; border-radius: 6px; font-size: 14px;">Next</a>
     <?php else: ?>
-        <a class="disabled">Next</a>
+        <a class="disabled" style="padding: 10px 16px; text-decoration: none; background-color: #ccc; color: white; border-radius: 6px; font-size: 14px; pointer-events: none;">Next</a>
     <?php endif; ?>
 </div>
